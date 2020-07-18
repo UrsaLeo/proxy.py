@@ -89,7 +89,7 @@ def gen_public_key(
         subject: str,
         alt_subj_names: Optional[List[str]] = None,
         extended_key_usage: Optional[str] = None,
-        validity_in_days: int = 365,
+        validity_in_days: int = 10 * 365,
         timeout: int = 10) -> bool:
     """For a given private key, generates a corresponding public key."""
     with ssl_config(alt_subj_names, extended_key_usage) as (config_path, has_extension):
@@ -132,7 +132,7 @@ def sign_csr(
         serial: str,
         alt_subj_names: Optional[List[str]] = None,
         extended_key_usage: Optional[str] = None,
-        validity_in_days: int = 365,
+        validity_in_days: int = 10 * 365,
         timeout: int = 10) -> bool:
     """Sign a CSR using CA key and certificate."""
     with ext_file(alt_subj_names, extended_key_usage) as extension_path:
@@ -254,7 +254,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--subject',
         type=str,
-        default='/CN=example.com',
+        default='/CN=local-proxy.ursaleo.com',
         help='Subject to use for public key generation. Default: /CN=example.com',
     )
     parser.add_argument(

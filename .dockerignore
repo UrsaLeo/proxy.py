@@ -7,5 +7,10 @@
 !setup.py
 !README.md
 
+!ca-cert.pem
+!ca-cert-bundle.pem
+!ca-key.pem
+!ca-signing-key.pem
+
 # Ignore __pycache__ directory
 proxy/__pycache__

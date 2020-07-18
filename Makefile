@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-NS ?= abhinavsingh
-IMAGE_NAME ?= proxy.py
+NS ?= us.gcr.io/ursaleo
+IMAGE_NAME ?= jwt-auth-proxy
 VERSION ?= v$(shell python -m proxy --version)
 LATEST_TAG := $(NS)/$(IMAGE_NAME):latest
 IMAGE_TAG := $(NS)/$(IMAGE_NAME):$(VERSION)
