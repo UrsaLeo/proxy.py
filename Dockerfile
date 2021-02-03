@@ -11,7 +11,7 @@ COPY proxy/ /app/proxy/
 
 WORKDIR /app
 RUN pip install --upgrade pip && \
-    pip install --install-option="--prefix=/deps" .
+    pip install --prefix=/deps .
 
 FROM base
 
