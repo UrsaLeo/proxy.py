@@ -17,7 +17,8 @@ from typing import Optional
 from ..http.parser import HttpParser
 from ..http.proxy import HttpProxyBasePlugin
 
-JWT_DEBUG_KEY = os.environ.get('JWT_DEBUG_KEY', "")
+GEMINI_JWT_PUK = os.environ.get('GEMINI_JWT_PUK', "")
+# JWT_DEBUG_KEY = os.environ.get('JWT_DEBUG_KEY', "")
 
 
 class AddJwtAuthorization(HttpProxyBasePlugin):
@@ -30,23 +31,23 @@ class AddJwtAuthorization(HttpProxyBasePlugin):
 
         now = datetime.utcnow()
 
-        # token = jwt.encode({
-        #         'iat': now,                             # issued at
-        #         'exp': now + timedelta(minutes=5),      # expiration time
-        #         'nbf': now,                             # not before
-        #         'aud': "phoenix/gemini"                 # audience
-        #     },
-        #     PRIVATE_KEY_PEM,
-        #     algorithm='RS512')
-
         token = jwt.encode({
                 'iat': now,                             # issued at
                 'exp': now + timedelta(minutes=5),      # expiration time
                 'nbf': now,                             # not before
                 'aud': "phoenix/gemini"                 # audience
             },
-            JWT_DEBUG_KEY,
-            algorithm='HS512')
+            GEMINI_JWT_PUK,
+            algorithm='RS512')
+
+        # token = jwt.encode({
+        #         'iat': now,                             # issued at
+        #         'exp': now + timedelta(minutes=5),      # expiration time
+        #         'nbf': now,                             # not before
+        #         'aud': "phoenix/gemini"                 # audience
+        #     },
+        #     JWT_DEBUG_KEY,
+        #     algorithm='HS512')
 
         request.add_header(b'Authorization', f"Bearer {str(token, encoding='utf-8')}".encode('utf-8'))
         return request
