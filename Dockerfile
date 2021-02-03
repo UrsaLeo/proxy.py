@@ -33,11 +33,11 @@ COPY ca-signing-key.pem /tmp/
 RUN apk update && apk add openssl
 # RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
-EXPOSE 8899/tcp
+EXPOSE 8890/tcp
 ENTRYPOINT [ "proxy" ]
 
 CMD [ "--hostname=0.0.0.0", \
-      "--port", "8899", \
+      "--port", "8890", \
       "--plugins", "proxy.plugin.AddJwtAuthorization", \
       "--ca-key-file", "/tmp/ca-key.pem", \
       "--ca-cert-file", "/tmp/ca-cert.pem", \
